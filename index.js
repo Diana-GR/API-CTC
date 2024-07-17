@@ -64,16 +64,16 @@ function fetchPokemonByType(pokemonType) {
 
 function showPokemon(pokemon, container) {
   const templatePokemon = `
-  <div>
+  <div class="pokemon-card">
     <div>
       <h2>${pokemon.name}</h2>
       <p>#${pokemon.id.toString().padStart(3, '0')}</p>
     </div>
     <img src="${pokemon.sprites.other["official-artwork"].front_default}" alt="${pokemon.name}" />
-    <div>
-      ${pokemon.types.map(typeInfo => `<div>${typeInfo.type.name}</div>`).join('')}
+    <div class="types">
+      ${pokemon.types.map(typeInfo => `<div style="background-color: ${getTypeColor(typeInfo.type.name)};">${typeInfo.type.name}</div>`).join('')}
     </div>
-    <div>
+    <div class="stats">
       <div>
         <div>${pokemon.weight / 10} kg</div>
         <p>Peso</p>
@@ -86,4 +86,28 @@ function showPokemon(pokemon, container) {
   </div>
   `;
   container.innerHTML += templatePokemon;
+}
+
+function getTypeColor(type) {
+  const colors = {
+    fire: "#f08030",
+    water: "#6890f0",
+    grass: "#78c850",
+    electric: "#f8d030",
+    rock: "#b8a038",
+    ground: "#e0c068",
+    psychic: "#f85888",
+    dark: "#705848",
+    fairy: "#ee99ac",
+    normal: "#a8a878",
+    fighting: "#c03028",
+    flying: "#a890f0",
+    poison: "#a040a0",
+    bug: "#a8b820",
+    ghost: "#705898",
+    steel: "#b8b8d0",
+    dragon: "#7038f8",
+    ice: "#98d8d8"
+  };
+  return colors[type] || "#68a090";
 }
