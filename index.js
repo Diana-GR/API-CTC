@@ -255,5 +255,6 @@ function showRegionData(region) {
   } else {
     regionImage.style.display = 'none';
   }
+  `<h3>hola:</h3>`;
   locationsList.innerHTML = region.locations.map(location => `<li>${location.name}</li>`).join('');
 }
