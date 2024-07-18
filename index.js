@@ -1,14 +1,15 @@
 document.addEventListener("DOMContentLoaded", () => {
   const searchBtn = document.querySelector("#buscar-btn");
+  const filterBtn = document.querySelector("#filtrar-btn");
+  const regionBtn = document.querySelector("#region-btn");
+
   searchBtn.addEventListener("click", () => {
     const pokemonName = document.querySelector("#pokemon-name").value.trim().toLowerCase();
     if (pokemonName) {
       fetchPokemonData(pokemonName);
-      fetchPokemonDataCadena(pokemonName);
     }
   });
 
-  const filterBtn = document.querySelector("#filtrar-btn");
   filterBtn.addEventListener("click", () => {
     const pokemonType = document.querySelector("#pokemon-type").value.trim().toLowerCase();
     if (pokemonType) {
@@ -16,13 +17,11 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  const regionBtn = document.querySelector("#search-btn");
   regionBtn.addEventListener("click", () => {
-    const regionName = document.querySelector("#region-name");
+    const regionName = document.querySelector("#region-name").value.trim().toLowerCase();
     if (regionName) {
       fetchRegionData(regionName);
     }
-    // console.log(regionName.value);
   });
 });
 
@@ -193,7 +192,6 @@ async function showEvolutionChain(chain) {
   }
   evolutionDiv.innerHTML = evolutionHtml;
 }
-
 async function fetchRegionData(regionName) {
   const apiUrl = `https://pokeapi.co/api/v2/region/`;
   const regionTitle = document.querySelector("#region-title");
@@ -245,7 +243,7 @@ function showRegionData(region) {
     "kanto": "Kanto.png",
     "paldea": "Paldea.png",
     "sinnoh": "Sinnoh.jpg",
-    "unova": "Unova.png"      
+    "unova": "Unova.png"
   };
 
   const imagePath = `../mapas/${regionImages[region.name.toLowerCase()]}`;
@@ -257,6 +255,6 @@ function showRegionData(region) {
   } else {
     regionImage.style.display = 'none';
   }
-
+  `<h3>hola:</h3>`;
   locationsList.innerHTML = region.locations.map(location => `<li>${location.name}</li>`).join('');
 }

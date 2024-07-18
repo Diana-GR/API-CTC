@@ -2,14 +2,6 @@ export default async function apiFetch(
     endpoint,
     { method, headers, body } = {}
   ) {
-    // const token = sessionStorage.getItem(tokenKey);
-    // if (token) {
-    //   headers = {
-    //     Authorization: `Token token=${token}`,
-    //     ...headers,
-    //   };
-    // }
-  
     if (body) {
       headers = {
         "Content-Type": "application/json",
