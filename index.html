@@ -41,18 +41,18 @@
         <div>
           <select id="region-name">
             <option value="">Selecciona la región</option>
-            <option value="region-alola">Alola</option>
-            <option value="region-galar">Galar</option>
-            <option value="region-hisui">Hisui</option>
-            <option value="region-hoenn">Hoenn</option>
-            <option value="region-johto">Johto</option>
-            <option value="region-kalos">Kalos</option>
-            <option value="region-kanto">Kanto</option>
-            <option value="region-paldea">Paldea</option>
-            <option value="region-sinnoh">Sinnoh</option>
-            <option value="region-unova">Unova</option>
+            <option value="alola">Alola</option>
+            <option value="galar">Galar</option>
+            <option value="hisui">Hisui</option>
+            <option value="hoenn">Hoenn</option>
+            <option value="johto">Johto</option>
+            <option value="kalos">Kalos</option>
+            <option value="kanto">Kanto</option>
+            <option value="paldea">Paldea</option>
+            <option value="sinnoh">Sinnoh</option>
+            <option value="unova">Unova</option>
           </select>
-          <button id="search-btn">Buscar Región</button>
+          <button id="region-btn">Buscar Región</button>
         </div>
       </div>
       <div>
@@ -64,8 +64,14 @@
     </div>
     <div id="pokemon-results"></div>
     <div id="evolution-chain"></div>
+    <div id="region-info">
+      <h2 id="region-title"></h2>
+      <img id="region-image" src="" alt="Region Image" />
+      <ul id="locations-list"></ul>
+    </div>
+
     <script type="module" src="index.js"></script>
     <!-- <script type="module" src="../js/evolution.js"></script> -->
-    <!-- <script type="module" src="../js/location.js"></script> -->
+    <script type="module" src="../js/location.js"></script>
   </body>
 </html>
