@@ -1,12 +1,13 @@
 body {
     font-family: Arial, sans-serif;
+    font-weight: bold;
     margin: 0;
     padding: 0;
-    background-color: #f4f4f4;
-    color: #333;
-    display: flex;
+    background-color: rgb(219, 210, 210);
+    /* color: #333; */
+    /* display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: center; */
   }
   
   #search-container {
@@ -25,13 +26,14 @@ body {
   
   #search-container button {
     background-color: #ffcb05;
-    color: white;
+    color: #2661AD;
     cursor: pointer;
     border: none;
+    font-weight: bold;
   }
   
   #search-container button:hover {
-    background-color: #ffb300;
+    background-color: #ffcb52;
   }
   
   #pokemon-results {
@@ -39,6 +41,7 @@ body {
     flex-wrap: wrap;
     justify-content: center;
     gap: 20px;
+    background-color: rgb(219, 210, 210);
   }
   
   .pokemon-card {
@@ -111,3 +114,22 @@ body {
     color: #aaa;
   }
   
+  .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 5px 20px;
+      background-color: #e00000;
+  }
+  .navbar a {
+      text-decoration: none;
+      color: white;
+      padding: 14px 20px;
+  }
+  .navbar img {
+      height: 140px; 
+  }
+  .navbar .nav-links {
+      display: flex;
+      gap: 2px;
+  }

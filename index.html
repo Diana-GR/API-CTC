@@ -7,38 +7,65 @@
     <link rel="stylesheet" href="./css/index.css" />
   </head>
   <body>
-    <div id="pokemon-info">
-      <input
-        type="text"
-        id="pokemon-name"
-        placeholder="Ingresa el nombre Pokemon"
-      />
-      <button id="buscar-btn">Buscar Pokemon</button>
-      <br />
-      <select id="pokemon-type">
-        <option value="">Selecciona el tipo</option>
-        <option value="fire">Fuego</option>
-        <option value="water">Agua</option>
-        <option value="grass">Planta</option>
-        <option value="electric">Eléctrico</option>
-        <option value="rock">Roca</option>
-        <option value="ground">Tierra</option>
-        <option value="psychic">Psíquico</option>
-        <option value="dark">Siniestro</option>
-        <option value="fairy">Hada</option>
-        <option value="normal">Normal</option>
-        <option value="fighting">Lucha</option>
-        <option value="flying">Volador</option>
-        <option value="poison">Veneno</option>
-        <option value="bug">Bicho</option>
-        <option value="ghost">Fantasma</option>
-        <option value="steel">Acero</option>
-        <option value="dragon">Dragón</option>
-        <option value="ice">Hielo</option>
-      </select>
-      <button id="filtrar-btn">Filtrar por tipo</button>
+    <div class="navbar">
+      <a href="index.html"><img src="/img/logo.png" alt="Home" /></a>
+      <div id="search-container">
+        <input type="text" id="pokemon-name" placeholder="Ingresa el nombre" />
+        <button id="buscar-btn">Buscar Pokemon</button>
+      </div>
+      <div id="search-container">
+        <div>
+          <select id="pokemon-type">
+            <option value="">Selecciona el tipo</option>
+            <option value="fire">Fuego</option>
+            <option value="water">Agua</option>
+            <option value="grass">Planta</option>
+            <option value="electric">Eléctrico</option>
+            <option value="rock">Roca</option>
+            <option value="ground">Tierra</option>
+            <option value="psychic">Psíquico</option>
+            <option value="dark">Siniestro</option>
+            <option value="fairy">Hada</option>
+            <option value="normal">Normal</option>
+            <option value="fighting">Lucha</option>
+            <option value="flying">Volador</option>
+            <option value="poison">Veneno</option>
+            <option value="bug">Bicho</option>
+            <option value="ghost">Fantasma</option>
+            <option value="steel">Acero</option>
+            <option value="dragon">Dragón</option>
+            <option value="ice">Hielo</option>
+          </select>
+          <button id="filtrar-btn">Filtrar por tipo</button>
+        </div>
+        <div>
+          <select id="region-name">
+            <option value="">Selecciona la región</option>
+            <option value="region-alola">Alola</option>
+            <option value="region-galar">Galar</option>
+            <option value="region-hisui">Hisui</option>
+            <option value="region-hoenn">Hoenn</option>
+            <option value="region-johto">Johto</option>
+            <option value="region-kalos">Kalos</option>
+            <option value="region-kanto">Kanto</option>
+            <option value="region-paldea">Paldea</option>
+            <option value="region-sinnoh">Sinnoh</option>
+            <option value="region-unova">Unova</option>
+          </select>
+          <button id="search-btn">Buscar Región</button>
+        </div>
+      </div>
+      <div>
+        <nav>
+          <a href="/pages/location.html">Region</a>
+          <a href="/pages/evolution.html">Evoluciones</a>
+        </nav>
+      </div>
     </div>
     <div id="pokemon-results"></div>
+    <div id="evolution-chain"></div>
     <script type="module" src="index.js"></script>
+    <!-- <script type="module" src="../js/evolution.js"></script> -->
+    <!-- <script type="module" src="../js/location.js"></script> -->
   </body>
 </html>
