@@ -1,182 +1,182 @@
 body {
-  font-family: Arial, sans-serif;
-  font-weight: bold;
-  margin: 0;
-  padding: 0;
-  background-color: rgb(219, 210, 210);
-}
-
-#search-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin: 20px;
-}
-
-#search-container input, #search-container select, #search-container button {
-  margin: 5px;
-  padding: 10px;
-  border-radius: 5px;
-  border: 1px solid #ccc;
-}
-
-#search-container button {
-  background-color: #ffcb05;
-  color: #2661AD;
-  cursor: pointer;
-  border: none;
-  font-weight: bold;
-}
-
-#search-container button:hover {
-  background-color: #ffcb52;
-}
-
-#pokemon-results {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 20px;
-  background-color: rgb(219, 210, 210);
-}
-
-.pokemon-card {
-  background-color: #fff;
-  border: 2px solid #e0e0e0;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  width: 200px;
-  text-align: center;
-  padding: 10px;
-  margin: 10px;
-  transition: transform 0.3s;
-}
-
-.pokemon-card:hover {
-  transform: scale(1.05);
-}
-
-.pokemon-card img {
-  max-width: 100%;
-  height: auto;
-}
-
-.pokemon-card h2 {
-  font-size: 1.2em;
-  margin: 10px 0;
-  color: #ff6347;
-}
-
-.pokemon-card p {
-  font-size: 0.9em;
-  color: #777;
-}
-
-.pokemon-card .types {
-  display: flex;
-  justify-content: center;
-  gap: 5px;
-  margin-top: 10px;
-}
-
-.pokemon-card .types div {
-  background-color: #ffcc00;
-  border-radius: 5px;
-  padding: 5px;
-  font-size: 0.8em;
-  color: white;
-  font-weight: bold;
-  text-transform: uppercase;
-}
-
-.pokemon-card .stats {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 10px;
-}
-
-.pokemon-card .stats div {
-  width: 45%;
-}
-
-.pokemon-card .stats div div {
-  font-size: 1.5em;
-  color: #555;
-}
-
-.pokemon-card .stats div p {
-  margin: 0;
-  font-size: 0.9em;
-  color: #aaa;
-}
-
-.navbar {
-    width: 100%;
+    font-family: Arial, sans-serif;
+    font-weight: bold;
+    margin: 0;
+    padding: 0;
+    background-color: rgb(219, 210, 210);
+  }
+  
+  #search-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px;
+  }
+  
+  #search-container input, #search-container select, #search-container button {
+    margin: 5px;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+  }
+  
+  #search-container button {
+    background-color: #ffcb05;
+    color: #2661AD;
+    cursor: pointer;
+    border: none;
+    font-weight: bold;
+  }
+  
+  #search-container button:hover {
+    background-color: #ffcb52;
+  }
+  
+  #pokemon-results {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    background-color: rgb(219, 210, 210);
+  }
+  
+  .pokemon-card {
+    background-color: #fff;
+    border: 2px solid #e0e0e0;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 200px;
+    text-align: center;
+    padding: 10px;
+    margin: 10px;
+    transition: transform 0.3s;
+  }
+  
+  .pokemon-card:hover {
+    transform: scale(1.05);
+  }
+  
+  .pokemon-card img {
+    max-width: 100%;
+    height: auto;
+  }
+  
+  .pokemon-card h2 {
+    font-size: 1.2em;
+    margin: 10px 0;
+    color: #ff6347;
+  }
+  
+  .pokemon-card p {
+    font-size: 0.9em;
+    color: #777;
+  }
+  
+  .pokemon-card .types {
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+    margin-top: 10px;
+  }
+  
+  .pokemon-card .types div {
+    background-color: #ffcc00;
+    border-radius: 5px;
+    padding: 5px;
+    font-size: 0.8em;
+    color: white;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+  
+  .pokemon-card .stats {
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    padding: 5px 20px;
-    background-color: #e00000;
-}
-.navbar a {
-    text-decoration: none;
-    color: white;
-    padding: 14px 20px;
-}
-.navbar img {
-    height: 140px; 
-}
-.navbar .nav-links {
+    margin-top: 10px;
+  }
+  
+  .pokemon-card .stats div {
+    width: 45%;
+  }
+  
+  .pokemon-card .stats div div {
+    font-size: 1.5em;
+    color: #555;
+  }
+  
+  .pokemon-card .stats div p {
+    margin: 0;
+    font-size: 0.9em;
+    color: #aaa;
+  }
+  
+  .navbar {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 5px 20px;
+      background-color: #e00000;
+  }
+  .navbar a {
+      text-decoration: none;
+      color: white;
+      padding: 14px 20px;
+  }
+  .navbar img {
+      height: 140px; 
+  }
+  .navbar .nav-links {
+      display: flex;
+      gap: 2px;
+  }
+  /* Agrega los estilos necesarios para mostrar las evoluciones en una fila horizontal */
+  .evolution-card {
+    display: inline-block;
+    text-align: center;
+    margin: 10px;
+  }
+  
+  .evolution-card img {
+    width: 100px;
+    height: auto;
+  }
+  
+  .linea-evolutiva{
     display: flex;
-    gap: 2px;
-}
-/* Agrega los estilos necesarios para mostrar las evoluciones en una fila horizontal */
-.evolution-card {
-  display: inline-block;
-  text-align: center;
-  margin: 10px;
-}
-
-.evolution-card img {
-  width: 100px;
-  height: auto;
-}
-
-.linea-evolutiva{
-  display: flex;
-  flex-wrap: nowrap;
-  padding: 5px 45px;
-}
-
-.evolution-title{
-  width: 100%;
-  padding: 10px 30px;
-}
-
-#evolution-imagen{
-  width: 50%;
-}
-
-#region-image{
-  width: 50%;
-}
-
-.region-div{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-#locations-list{
-  font-weight: lighter;
-  columns: 3;
-}
-
-.lista{
-  height: 10%;
-}
-
-#region-info{
-  padding: 10px 30px;
-  visibility:hidden;
-}
+    flex-wrap: nowrap;
+    padding: 5px 45px;
+  }
+  
+  .evolution-title{
+    width: 100%;
+    padding: 10px 30px;
+  }
+  
+  #evolution-imagen{
+    width: 50%;
+  }
+  
+  #region-image{
+    width: 50%;
+  }
+  
+  .region-div{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  #locations-list{
+    font-weight: lighter;
+    columns: 3;
+  }
+  
+  .lista{
+    height: 10%;
+  }
+  
+  #region-info{
+    padding: 10px 30px;
+    visibility:hidden;
+  }
