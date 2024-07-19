@@ -7,6 +7,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const pokemonName = document.querySelector("#pokemon-name").value.trim().toLowerCase();
     if (pokemonName) {
       fetchPokemonData(pokemonName);
+      fetchEvolutionChain(pokemonName);
     }
   });
 
@@ -28,6 +29,7 @@ document.addEventListener("DOMContentLoaded", () => {
 function fetchPokemonData(pokemonName) {
   const apiUrl = `https://pokeapi.co/api/v2/pokemon/${pokemonName}`;
   const appDiv = document.querySelector("#pokemon-results");
+    appDiv.innerHTML = '';
 
   fetch(apiUrl)
     .then((response) => {
