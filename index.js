@@ -4,21 +4,31 @@ document.addEventListener("DOMContentLoaded", () => {
   const regionBtn = document.querySelector("#region-btn");
 
   searchBtn.addEventListener("click", () => {
-    const pokemonName = document.querySelector("#pokemon-name").value.trim().toLowerCase();
+    const pokemonName = document
+      .querySelector("#pokemon-name")
+      .value.trim()
+      .toLowerCase();
     if (pokemonName) {
       fetchPokemonData(pokemonName);
+      fetchPokemonDataCadena(pokemonName);
     }
   });
 
   filterBtn.addEventListener("click", () => {
-    const pokemonType = document.querySelector("#pokemon-type").value.trim().toLowerCase();
+    const pokemonType = document
+      .querySelector("#pokemon-type")
+      .value.trim()
+      .toLowerCase();
     if (pokemonType) {
       fetchPokemonByType(pokemonType);
     }
   });
 
   regionBtn.addEventListener("click", () => {
-    const regionName = document.querySelector("#region-name").value.trim().toLowerCase();
+    const regionName = document
+      .querySelector("#region-name")
+      .value.trim()
+      .toLowerCase();
     if (regionName) {
       fetchRegionData(regionName);
     }
@@ -28,7 +38,7 @@ document.addEventListener("DOMContentLoaded", () => {
 function fetchPokemonData(pokemonName) {
   const apiUrl = `https://pokeapi.co/api/v2/pokemon/${pokemonName}`;
   const appDiv = document.querySelector("#pokemon-results");
-    appDiv.innerHTML = '';
+  appDiv.innerHTML = "";
 
   fetch(apiUrl)
     .then((response) => {
@@ -42,14 +52,17 @@ function fetchPokemonData(pokemonName) {
     })
     .catch((error) => {
       console.error("Hubo un problema con la operación fetch:", error);
-      appDiv.innerHTML = "Error al cargar los datos, verifica que el nombre Pokemon esté escrito correctamente.";
+      appDiv.innerHTML =
+        "Error al cargar los datos, verifica que el nombre Pokemon esté escrito correctamente.";
     });
 }
 
 function fetchPokemonByType(pokemonType) {
   const apiUrl = `https://pokeapi.co/api/v2/type/${pokemonType}`;
+  const evolutionDiv = document.querySelector("#evolution-chain");
   const resultsDiv = document.querySelector("#pokemon-results");
-  resultsDiv.innerHTML = ''; // Clear previous results
+  resultsDiv.innerHTML = ""; // Clear previous results
+  evolutionDiv.innerHTML = "";
 
   fetch(apiUrl)
     .then((response) => {
@@ -59,11 +72,11 @@ function fetchPokemonByType(pokemonType) {
       return response.json();
     })
     .then((data) => {
-      const pokemons = data.pokemon.map(p => p.pokemon);
-      pokemons.forEach(p => {
+      const pokemons = data.pokemon.map((p) => p.pokemon);
+      pokemons.forEach((p) => {
         fetch(p.url)
-          .then(response => response.json())
-          .then(pokemonData => showPokemon(pokemonData, resultsDiv));
+          .then((response) => response.json())
+          .then((pokemonData) => showPokemon(pokemonData, resultsDiv));
       });
     })
     .catch((error) => {
@@ -77,20 +90,29 @@ function showPokemon(pokemon, container) {
   <div class="pokemon-card">
     <div>
       <h2>${pokemon.name}</h2>
-      <p>#${pokemon.id.toString().padStart(3, '0')}</p>
+      <p>#${pokemon.id.toString().padStart(3, "0")}</p>
     </div>
-    <img src="${pokemon.sprites.other["official-artwork"].front_default}" alt="${pokemon.name}" />
+    <img src="${
+      pokemon.sprites.other["official-artwork"].front_default
+    }" alt="${pokemon.name}" />
     <div class="types">
-      ${pokemon.types.map(typeInfo => `<div style="background-color: ${getTypeColor(typeInfo.type.name)};">${typeInfo.type.name}</div>`).join('')}
+      ${pokemon.types
+        .map(
+          (typeInfo) =>
+            `<div style="background-color: ${getTypeColor(
+              typeInfo.type.name
+            )};">${typeInfo.type.name}</div>`
+        )
+        .join("")}
     </div>
     <div class="stats">
       <div>
-        <div>${pokemon.weight / 10} kg</div>
         <p>Peso</p>
+        <h4>${pokemon.weight / 10} kg</h4>
       </div>
       <div>
-        <div>${pokemon.height / 10} m</div>
         <p>Altura</p>
+        <h4>${pokemon.height / 10} m</h4>
       </div>
     </div>
   </div>
@@ -117,7 +139,7 @@ function getTypeColor(type) {
     ghost: "#705898",
     steel: "#b8b8d0",
     dragon: "#7038f8",
-    ice: "#98d8d8"
+    ice: "#98d8d8",
   };
   return colors[type] || "#68a090";
 }
@@ -157,7 +179,7 @@ async function fetchEvolutionChain(url) {
 
 async function fetchPokemonImage(pokemonName) {
   const apiUrl = `https://pokeapi.co/api/v2/pokemon/${pokemonName}`;
-  
+
   try {
     const response = await fetch(apiUrl);
     if (!response.ok) {
@@ -173,7 +195,7 @@ async function fetchPokemonImage(pokemonName) {
 
 async function showEvolutionChain(chain) {
   const evolutionDiv = document.querySelector("#evolution-chain");
-  let evolutionHtml = `<h2>Linea evolutiva de ${chain.species.name}:</h2>`;
+  let evolutionHtml = `<div class="evolution-title"><h2>Linea evolutiva de ${chain.species.name}:</h2></div><div class="linea-evolutiva">`;
 
   let current = chain;
   while (current) {
@@ -181,51 +203,62 @@ async function showEvolutionChain(chain) {
     evolutionHtml += `
       <div>
         <h3>${current.species.name}</h3>
-        ${pokemonImage ? `<img src="${pokemonImage}" alt="${current.species.name}">` : ''}
+        ${
+          pokemonImage
+            ? `<img src="${pokemonImage}" alt="${current.species.name}" id="evolution-imagen">`
+            : ""
+        }
       </div>
     `;
     if (current.evolves_to.length > 0) {
-      evolutionHtml += '<div style="margin-left: 20px;">';
       current = current.evolves_to[0];
     } else {
       current = null;
     }
   }
-  evolutionDiv.innerHTML = evolutionHtml;
+  evolutionDiv.innerHTML = evolutionHtml + "</div>";
 }
+
 async function fetchRegionData(regionName) {
   const apiUrl = `https://pokeapi.co/api/v2/region/`;
   const regionTitle = document.querySelector("#region-title");
   const regionImage = document.querySelector("#region-image");
   const locationsList = document.querySelector("#locations-list");
-
+  const resultsDiv = document.querySelector("#pokemon-results");
+  resultsDiv.innerHTML = ""; // Clear previous results
+  document.querySelector("#region-info").style.visibility="visible";
   try {
     const response = await fetch(apiUrl);
     if (!response.ok) {
       throw new Error("Network response was not ok " + response.statusText);
     }
     const data = await response.json();
-    const region = data.results.find(r => r.name.toLowerCase() === regionName);
+    const region = data.results.find(
+      (r) => r.name.toLowerCase() === regionName
+    );
 
     if (!region) {
-      regionTitle.textContent = "Región no encontrada, por favor verifica que la región exista.";
-      regionImage.style.display = 'none';
-      locationsList.innerHTML = '';
+      regionTitle.textContent =
+        "Región no encontrada, por favor verifica que la región exista.";
+      regionImage.style.display = "none";
+      locationsList.innerHTML = "";
       return;
     }
 
     const regionDetailsResponse = await fetch(region.url);
     if (!regionDetailsResponse.ok) {
-      throw new Error("Network response was not ok " + regionDetailsResponse.statusText);
+      throw new Error(
+        "Network response was not ok " + regionDetailsResponse.statusText
+      );
     }
     const regionDetails = await regionDetailsResponse.json();
-
+    
     showRegionData(regionDetails);
   } catch (error) {
     console.error("Hubo un problema con la operación fetch:", error);
     regionTitle.textContent = "Error al cargar los datos";
-    regionImage.style.display = 'none';
-    locationsList.innerHTML = '';
+    regionImage.style.display = "none";
+    locationsList.innerHTML = "";
   }
 }
 
@@ -235,16 +268,16 @@ function showRegionData(region) {
   const locationsList = document.querySelector("#locations-list");
 
   const regionImages = {
-    "alola": "Alola.png",
-    "galar": "Galar.png",
-    "hisui": "Hisui.png",
-    "hoenn": "Hoenn.png",
-    "johto": "Johto.png",
-    "kalos": "Kalos.png",
-    "kanto": "Kanto.png",
-    "paldea": "Paldea.png",
-    "sinnoh": "Sinnoh.jpg",
-    "unova": "Unova.png"
+    alola: "Alola.png",
+    galar: "Galar.png",
+    hisui: "Hisui.png",
+    hoenn: "Hoenn.png",
+    johto: "Johto.png",
+    kalos: "Kalos.png",
+    kanto: "Kanto.png",
+    paldea: "Paldea.png",
+    sinnoh: "Sinnoh.jpg",
+    unova: "Unova.png",
   };
 
   const imagePath = `../mapas/${regionImages[region.name.toLowerCase()]}`;
@@ -252,10 +285,11 @@ function showRegionData(region) {
   regionTitle.textContent = `Región: ${region.name}`;
   if (regionImages[region.name.toLowerCase()]) {
     regionImage.src = imagePath;
-    regionImage.style.display = 'block';
+    regionImage.style.display = "block";
   } else {
-    regionImage.style.display = 'none';
+    regionImage.style.display = "none";
   }
-  `<h3>hola:</h3>`;
-  locationsList.innerHTML = region.locations.map(location => `<li>${location.name}</li>`).join('');
+  locationsList.innerHTML = region.locations
+    .map((location) => `<li>${location.name}</li>`)
+    .join("");
 }
