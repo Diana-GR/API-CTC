@@ -7,7 +7,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const pokemonName = document.querySelector("#pokemon-name").value.trim().toLowerCase();
     if (pokemonName) {
       fetchPokemonData(pokemonName);
-      fetchEvolutionChain(pokemonName);
     }
   });
 
