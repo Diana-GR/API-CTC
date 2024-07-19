@@ -1,24 +1,34 @@
 document.addEventListener("DOMContentLoaded", () => {
   const searchBtn = document.querySelector("#buscar-btn");
+  const filterBtn = document.querySelector("#filtrar-btn");
+  const regionBtn = document.querySelector("#region-btn");
+
   searchBtn.addEventListener("click", () => {
     const pokemonName = document.querySelector("#pokemon-name").value.trim().toLowerCase();
     if (pokemonName) {
       fetchPokemonData(pokemonName);
+      fetchPokemonDataCadena(pokemonName);
     }
   });
 
-  const filterBtn = document.querySelector("#filtrar-btn");
   filterBtn.addEventListener("click", () => {
     const pokemonType = document.querySelector("#pokemon-type").value.trim().toLowerCase();
     if (pokemonType) {
       fetchPokemonByType(pokemonType);
     }
   });
+
+  regionBtn.addEventListener("click", () => {
+    const regionName = document.querySelector("#region-name").value.trim().toLowerCase();
+    if (regionName) {
+      fetchRegionData(regionName);
+    }
+  });
 });
 
 function fetchPokemonData(pokemonName) {
   const apiUrl = `https://pokeapi.co/api/v2/pokemon/${pokemonName}`;
-  const appDiv = document.querySelector("#pokemon-info");
+  const appDiv = document.querySelector("#pokemon-results");
 
   fetch(apiUrl)
     .then((response) => {
@@ -32,7 +42,7 @@ function fetchPokemonData(pokemonName) {
     })
     .catch((error) => {
       console.error("Hubo un problema con la operación fetch:", error);
-      appDiv.innerHTML = "Error al cargar los datos, verifica que el nombre Pokemon este escrito correctamente.";
+      appDiv.innerHTML = "Error al cargar los datos, verifica que el nombre Pokemon esté escrito correctamente.";
     });
 }
 
@@ -111,3 +121,100 @@ function getTypeColor(type) {
   };
   return colors[type] || "#68a090";
 }
+
+async function fetchPokemonDataCadena(pokemonName) {
+  const apiUrl = `https://pokeapi.co/api/v2/pokemon-species/${pokemonName}`;
+  const evolutionDiv = document.querySelector("#evolution-chain");
+
+  try {
+    const response = await fetch(apiUrl);
+    if (!response.ok) {
+      throw new Error("Network response was not ok " + response.statusText);
+    }
+    const data = await response.json();
+    fetchEvolutionChain(data.evolution_chain.url);
+  } catch (error) {
+    console.error("Hubo un problema con la operación fetch:", error);
+    evolutionDiv.innerHTML = "Error al cargar los datos";
+  }
+}
+
+async function fetchEvolutionChain(url) {
+  const evolutionDiv = document.querySelector("#evolution-chain");
+
+  try {
+    const response = await fetch(url);
+    if (!response.ok) {
+      throw new Error("Network response was not ok " + response.statusText);
+    }
+    const data = await response.json();
+    showEvolutionChain(data.chain);
+  } catch (error) {
+    console.error("Hubo un problema con la operación fetch:", error);
+    evolutionDiv.innerHTML = "Error al cargar la cadena de evolución";
+  }
+}
+
+async function fetchPokemonImage(pokemonName) {
+  const apiUrl = `https://pokeapi.co/api/v2/pokemon/${pokemonName}`;
+  
+  try {
+    const response = await fetch(apiUrl);
+    if (!response.ok) {
+      throw new Error("Network response was not ok " + response.statusText);
+    }
+    const data = await response.json();
+    return data.sprites.other["official-artwork"].front_default;
+  } catch (error) {
+    console.error("Hubo un problema con la operación fetch:", error);
+    return null;
+  }
+}
+
+async function showEvolutionChain(chain) {
+  const evolutionDiv = document.querySelector("#evolution-chain");
+  evolutionDiv.innerHTML = "";
+
+  let currentChain = chain;
+  while (currentChain) {
+    const pokemonName = currentChain.species.name;
+    const imageUrl = await fetchPokemonImage(pokemonName);
+
+    if (imageUrl) {
+      const templateEvolution = `
+        <div class="evolution-card">
+          <img src="${imageUrl}" alt="${pokemonName}" />
+          <h3>${pokemonName}</h3>
+        </div>
+      `;
+      evolutionDiv.innerHTML += templateEvolution;
+    }
+
+    currentChain = currentChain.evolves_to[0];
+  }
+}
+
+async function fetchRegionData(regionName) {
+  const apiUrl = `https://pokeapi.co/api/v2/region/${regionName}`;
+  const regionTitle = document.querySelector("#region-title");
+  const regionImage = document.querySelector("#region-image");
+  const locationsList = document.querySelector("#locations-list");
+
+  try {
+    const response = await fetch(apiUrl);
+    if (!response.ok) {
+      throw new Error("Network response was not ok " + response.statusText);
+    }
+    const data = await response.json();
+
+    regionTitle.textContent = regionName.charAt(0).toUpperCase() + regionName.slice(1);
+    regionImage.src = `./img/${regionName}.png`;
+    locationsList.innerHTML = data.locations.map(location => `<li>${location.name}</li>`).join("");
+  } catch (error) {
+    console.error("Hubo un problema con la operación fetch:", error);
+    regionTitle.textContent = "Error al cargar la región";
+    regionImage.src = "";
+    locationsList.innerHTML = "";
+  }
+}
+
