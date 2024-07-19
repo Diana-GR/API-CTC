@@ -217,4 +217,3 @@ async function fetchRegionData(regionName) {
     locationsList.innerHTML = "";
   }
 }
-
